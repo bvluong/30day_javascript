@@ -100,14 +100,25 @@
 
 <script>
   const items = document.querySelectorAll('.item input');
-  let item_index = -1;
-  function highlight(e) {
-    console.dir(e);
+  let lastChecked;
+  function handleCheck(e) {
+    let swap = false
+    if (e.shiftKey && this.checked) {
+      items.forEach(item => {
+        if (item === lastChecked) {
+          swap = true
+        } else if (item === this) {
+          swap = false
+        } else if (swap) {
+          item.checked = true
+        }
+      })
+    }
+    lastChecked = this;
   }
-  console.log(items);
 
   items.forEach (item => {
-    item.addEventListener('click', highlight)
+    item.addEventListener('click', handleCheck)
   })
 </script>
 </body>
