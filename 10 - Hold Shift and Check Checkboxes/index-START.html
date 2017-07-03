@@ -99,6 +99,16 @@
   </div>
 
 <script>
+  const items = document.querySelectorAll('.item input');
+  let item_index = -1;
+  function highlight(e) {
+    console.dir(e);
+  }
+  console.log(items);
+
+  items.forEach (item => {
+    item.addEventListener('click', highlight)
+  })
 </script>
 </body>
 </html>
