@@ -105,10 +105,8 @@
     let swap = false
     if (e.shiftKey && this.checked) {
       items.forEach(item => {
-        if (item === lastChecked) {
-          swap = true
-        } else if (item === this) {
-          swap = false
+        if (item === lastChecked || item === this ) {
+          swap = !swap
         } else if (swap) {
           item.checked = true
         }
