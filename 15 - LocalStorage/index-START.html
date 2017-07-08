@@ -25,18 +25,23 @@
   console.log(addItems);
   function addItem(e) {
     e.preventDefault();
-    console.log(e);
-    console.log(this);
     const text = this.querySelector('[name=item]').value
     let object = {
       text,
       done: false
     }
     items.push(object);
+    populateList(items, itemsList);
     this.reset();
-    console.log(items);
   }
-  items.forEach(item => itemsList.classList.add(item.text));
+
+  function populateList(plates = [], plateLists) {
+    plateLists.innerHTML = plates.map ((plate,idx) => {
+      return (
+        `<li key=${idx}>${plate.text}</li>`
+      )
+    }).join('')
+  }
   addItems.addEventListener('submit', addItem)
 
 
