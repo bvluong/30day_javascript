@@ -5,5 +5,20 @@ const progress = player.querySelector('.progress');
 const progressBar = player.querySelector('.progress__filled');
 
 const toggle = player.querySelector('.toggle');
-const skipButtons = player.querySelectorAll('.[data-skip]');
+const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
+console.log(video);
+// Build out function
+function togglePlay() {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
+}
+
+// Hook up event listeners
+
+
+toggle.addEventListener('click', togglePlay);
+video.addEventListener('click',togglePlay);
