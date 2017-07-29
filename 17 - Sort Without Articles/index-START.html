@@ -46,8 +46,6 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
-bandsRemoved = {}
-
 function removeWord(word) {
   if (word.slice(0,4) === "The ") {
     return word.slice(4)
@@ -60,17 +58,26 @@ function removeWord(word) {
   }
 }
 
-bands.forEach(band => bandsRemoved[band] = removeWord(band) );
 let sortedBands = bands.sort((a,b) => {
-  if (bandsRemoved[a] > bandsRemoved[b]) {
+  if (removeWord(a) > removeWord(b)) {
     return 1
-  } else if (bandsRemoved[a] < bandsRemoved[b]) {
+  } else if (removeWord(a) < removeWord(b)) {
     return -1
   } else {
     return 0
   }
   });
 console.log(sortedBands);
+
+const bandList = document.querySelector('#bands')
+
+function displayBands(sortedBands) {
+  return sortedBands.map(band =>
+    `<li>${band}</li>`
+  )
+}
+
+bandList.innerHTML = displayBands(sortedBands).join("");
 
 
 </script>
