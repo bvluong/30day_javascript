@@ -37,10 +37,12 @@ const suggestions = document.querySelector('.suggestions')
 function updatePlaces(e) {
   let filterPlaces = findMatches(e.target.value,cities)
   let displayPlaces = filterPlaces.map(place => {
-    return (`<li>${place.city}</li>`)
+    return (`<li>
+      <span>${place.city}, ${place.state}</span>
+      <span>${place.population}</span>
+      </li>`)
   });
-  suggestions.innerHTML = displayPlaces;
-
+  suggestions.innerHTML = displayPlaces.join('');
 }
 
 searchBar.addEventListener("change", updatePlaces)
