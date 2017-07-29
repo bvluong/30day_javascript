@@ -78,6 +78,17 @@
     const keys = document.querySelectorAll('.key');
     keys.forEach(key => key.addEventListener('transitionend', removeTransition))
 
+    let linksArr = [];
+    let workingLinks = [];
+    document.querySelectorAll("li a").forEach(el => linksArr.push(el.href))
+    linksArr.forEach(link => fetch(link).then(resp => {
+      if (resp.status !== 404) {
+        workingLinks.push(resp.url)
+      }
+    }))
+
+    
+
 </script>
 
 
