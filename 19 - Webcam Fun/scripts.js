@@ -24,8 +24,25 @@ function paintToCanvas() {
 
   setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
+    // take the pixels out
+    let pixels = ctx.getImageData(0, 0, width, height);
+    //mess with them
+    pixels = redEffect(pixels);
+    // put them back
+    ctx.putImageData(pixels,0,0);
+
+
   }, 16);
 
+}
+
+function redEffect(pixels) {
+  for (var i = 0; i < pixels.data.length; i+= 4) {
+    pixels.data[i] = pixels.data[i] + 100; // red
+    pixels.data[i + 1] = pixels.data[i+1] - 50; // green
+    pixels.data[i + 2] = pixels.data[i+2] * 0.5; // blue
+  }
+  return pixels;
 }
 
 function takePhoto() {
@@ -34,7 +51,6 @@ function takePhoto() {
   snap.play();
   //  take data out of the canvas
   const picture = canvas.toDataURL('image/jpeg');
-  console.log(picture);
   const link = document.createElement('a');
   link.href = picture;
   link.setAttribute('download','handsome');
