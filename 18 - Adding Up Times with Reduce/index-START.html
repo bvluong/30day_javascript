@@ -189,9 +189,16 @@
 
     const [min, sec] = node.dataset.time.split(":").map(parseFloat)
     return (min*60)+sec;
-
-  });
+  }).reduce((total,sec) => total + sec);
   console.log(seconds);
+
+  const hours = Math.floor(seconds/ 3600);
+  let secondsLeft = seconds % 3600;
+  let minutes = Math.floor(secondsLeft / 60);
+  let secs = secondsLeft % 60
+  console.log(hours);
+  console.log(minutes);
+  console.log(secs);
 
 </script>
 </body>
