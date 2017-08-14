@@ -27,7 +27,9 @@ function paintToCanvas() {
     // take the pixels out
     let pixels = ctx.getImageData(0, 0, width, height);
     //mess with them
-    pixels = redEffect(pixels);
+    pixels = rbgSplit(pixels);
+    // add ghosting effect
+    ctx.globalAlpha = 0.4;
     // put them back
     ctx.putImageData(pixels,0,0);
 
@@ -41,6 +43,15 @@ function redEffect(pixels) {
     pixels.data[i] = pixels.data[i] + 100; // red
     pixels.data[i + 1] = pixels.data[i+1] - 50; // green
     pixels.data[i + 2] = pixels.data[i+2] * 0.5; // blue
+  }
+  return pixels;
+}
+
+function rbgSplit(pixels) {
+  for (var i = 0; i < pixels.data.length; i+= 4) {
+    pixels.data[i - 150] = pixels.data[i]; // red
+    pixels.data[i + 500] = pixels.data[i+1]; // green
+    pixels.data[i - 500] = pixels.data[i+2]; // blue
   }
   return pixels;
 }
